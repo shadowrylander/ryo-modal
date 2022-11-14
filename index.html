@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-11-14 Mon 10:27 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RYO modal mode!</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Jeet Ray" />
+<link rel="stylesheet" type="text/css" href="https://combinatronics.io/sylvorg/settings/main/src/styles/primary/syvl.css" />
+<link rel="icon" href="https://combinatronics.io/sylvorg/settings/main/src/icons/favicons/shiny-zigzagoon-galar.ico" sizes="any" />
+<link rel="icon" href="https://combinatronics.io/sylvorg/settings/main/src/icons/favicons/shiny-zigzagoon-galar.svg" />
+<link rel="manifest" href="https://combinatronics.io/sylvorg/settings/main/manifest.json" />
+<link rel="stylesheet" type="text/css" href="https://combinatronics.io/sylvorg/settings/main/src/styles/highlight/paraiso-dark.min.css" />
+<script src="https://combinatronics.io/sylvorg/settings/main/src/scripts/highlight/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<div class="header">
+<h1>We Are Syvlorg.</h1>
+<a href="">About Me</a>
+<a href="">About This Website</a>
+<a href="">About Syvlorg</a>
+<a href="https://resume.syvl.org">Résumé</a>
+<a href="https://index.syvl.org">Index</a>
+</div>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">RYO modal mode!</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgcb7419d">Usage</a>
+<ul>
+<li><a href="#org3dba636">Prefix keys</a></li>
+<li><a href="#org7ccb218">Creating and binding deinos to keys</a></li>
+<li><a href="#orgded8311">Defining "normal mode" keys which enter <code>ryo-modal</code></a></li>
+<li><a href="#orgbcd8d59">Use-package keyword</a></li>
+<li><a href="#org80862a2"><code>which-key</code> integration</a></li>
+</ul>
+</li>
+<li><a href="#org69d1a09">Keybindings when region is active</a></li>
+<li><a href="#orgc5f1384">Credits</a></li>
+<li><a href="#org6e21f28">Changelog</a></li>
+</ul>
+</div>
+</div>
+<p>
+<code>ryo-modal</code> is an Emacs minor-mode, providing useful features for creating your own modal editing environment. Unlike <a href="https://bitbucket.org/lyro/evil/wiki/Home">evil</a>, <a href="https://github.com/jyp/boon">boon</a>, <a href="http://ergoemacs.org/misc/ergoemacs_vi_mode.html">xah-fly-keys</a>, <a href="https://github.com/chrisdone/god-mode">god-mode</a>, <a href="https://github.com/fgeller/fingers.el">fingers</a>, and <a href="http://retroj.net/modal-mode">modal-mode</a>, <code>ryo-modal</code> does not provide any default keybindings: roll your own! <code>ryo-modal</code> is similar to (and inspired by) <a href="https://github.com/mrkkrp/modalka">modalka</a>, but provides more features.
+</p>
+
+<p>
+The package <a href="https://github.com/jmorag/kakoune.el">kakoune.el</a> uses <code>ryo-modal-mode</code> to implement its bindings.
+</p>
+
+<div id="outline-container-orgcb7419d" class="outline-2">
+<h2 id="orgcb7419d">Usage</h2>
+<div class="outline-text-2" id="text-orgcb7419d">
+<p>
+You can use <code>M-x ryo-modal-mode</code> to activate <code>ryo-modal</code>, but without configuration nothing will happen. You need to add keybindings to it first; this can be done by <code>ryo-modal-key</code> (bind one key), <code>ryo-modal-keys</code> (bind many keys at once) or <code>ryo-modal-major-mode-keys</code> (bind several keys at once, but only if in a specific major mode, or a major mode derived from another).
+</p>
+
+<p>
+Here's a simple configuration, using <a href="https://github.com/jwiegley/use-package">use-package</a>:
+</p>
+
+<div class="org-src-container">
+<pre><code class="language-lisp match-braces rainbow-braces">  (use-package ryo-modal
+    :commands ryo-modal-mode
+    :bind ("C-c SPC" . ryo-modal-mode)
+    :config
+    (ryo-modal-keys
+     ("," ryo-modal-repeat)
+     ("q" ryo-modal-mode)
+     ("h" backward-char)
+     ("j" next-line)
+     ("k" previous-line)
+     ("l" forward-char))
+
+    (ryo-modal-keys
+     ;; First argument to ryo-modal-keys may be a list of keywords.
+     ;; These keywords will be applied to all keybindings.
+     (:norepeat t)
+     ("0" "M-0")
+     ("1" "M-1")
+     ("2" "M-2")
+     ("3" "M-3")
+     ("4" "M-4")
+     ("5" "M-5")
+     ("6" "M-6")
+     ("7" "M-7")
+     ("8" "M-8")
+     ("9" "M-9")))
+</code></pre>
+</div>
+
+<p>
+Now I can start <code>ryo-modal-mode</code> by pressing <code>C-c SPC</code>, and get vim-like <code>hjkl</code>-navigation and use digit arguments by pressing the number keys. Notice that other keys are unmodified, so pressing <code>r</code> would insert <code>r</code> into the buffer. <code>ryo</code> also defines the command <code>ryo-modal-repeat</code>, which will repeat the last command executed by <code>ryo</code> (but see <code>:norepeat</code> below).
+</p>
+
+<p>
+When defining keys the first argument of each binding is the key (will be wrapped inside <code>kbd</code>) and the second argument is the <i>target</i>; usually a command or a string representing a keypress that should be simulated. The rest of the arguments are keyword pairs, providing extra features. The following keywords exist:
+</p>
+
+<dl class="org-dl">
+<dt><code>:name</code></dt><dd><code>ryo-modal</code> creates a new symbol for the command you bind. By default this name will depend on the target of the binding, but by using <code>:name</code> and a string you can give it your own name. It is perfectly fine to have whitespace, or any other symbol, in the name.</dd>
+<dt><code>:mode</code></dt><dd>If <code>:mode</code> is set to a quoted major or minor mode symbol (for instance <code>:mode 'org-mode</code>) the command will only be active in that mode (or in a major mode that derives from it). If you have a lot of major mode specific bindings, you may want to use <code>ryo-modal-major-mode-keys</code> instead to reduce clutter.</dd>
+<dt><code>:exit</code></dt><dd>By providing <code>:exit t</code> you will exit <code>ryo-modal-mode</code> before running the command. This is useful if you have a command and always want to input text after running it.</dd>
+<dt><code>:read</code></dt><dd>If <code>:read t</code> you will be prompted to insert a string in the minibuffer after running the command, and this string will be inserted into the buffer. This can be useful if you want to have a command which for instance replaces a word with another word, without exiting <code>ryo-modal-mode</code>.</dd>
+<dt><code>:then</code></dt><dd>By providing a quoted list of command symbols, and/or functions to be run with zero arguments (lambdas works too), to <code>:then</code> you can specify additional commands that should be run after the "real" command. This way you can easily define command chains, without using <code>defun</code> or similar.</dd>
+<dt><code>:first</code></dt><dd>Similar to <code>:then</code>, but will be run before the "real" command. Keep in mind that commands run here will consume <code>universal-argument</code> etc, before the real command is run.</dd>
+<dt><code>:norepeat</code></dt><dd>If you specify <code>:norepeat t</code> then using the binding will <i>not</i> make it overwrite the current command being triggered by <code>ryo-modal-repeat</code>.</dd>
+<dt>:mc-all</dt><dd>If you're using <code>multiple-cursors</code> it can be annoying that it asks you if you want to use the commands generated by <code>ryo</code> for all cursors. If <code>:mc-all</code> is <code>t</code> then the command will be run by all cursors. If it instead is <code>0</code> it will only be run once. Note that setting <code>:mc-all</code> to <code>nil</code> will do nothing.</dd>
+</dl>
+
+<p>
+Here's an example using the keyword arguments (can be used in <code>ryo-modal-keys</code> too), and an example of <code>ryo-modal-major-mode-keys</code>:
+</p>
+
+<div class="org-src-container">
+<pre><code class="language-lisp match-braces rainbow-braces">  (ryo-modal-key "SPC k" 'org-previous-visible-heading :then '(forward-to-word
+                                                               org-kill-line)
+                 :mode 'org-mode :name "org-replace-previous-heading" :read t)
+
+  (ryo-modal-major-mode-keys
+   'python-mode
+   ("J" python-nav-forward-defun)
+   ("K" python-nav-backward-defun))
+</code></pre>
+</div>
+
+<p>
+Notice that the target command argument needs to be quoted when using <code>ryo-modal-key</code>, but not when using <code>ryo-modal-keys</code>!
+</p>
+
+<p>
+In order to get an overview of all the bindings you've defined, use <code>M-x ryo-modal-bindings</code>. If you want to change the cursor color or cursor type, edit <code>ryo-modal-cursor-color</code> and/or <code>ryo-modal-cursor-type</code>.
+</p>
+</div>
+
+<div id="outline-container-org3dba636" class="outline-3">
+<h3 id="org3dba636">Prefix keys</h3>
+<div class="outline-text-3" id="text-org3dba636">
+<p>
+Sometimes you want many keys bound under the same prefix key. A convenient way of doing this is to let the <i>target</i> be a list of the keys in the prefix map. Each element of the list will be sent to <code>ryo-modal-key</code>, using the key as a prefix. If the key has any arguments, these will be sent too. Prefix examples:
+</p>
+
+<div class="org-src-container">
+<pre><code class="language-lisp match-braces rainbow-braces">  (ryo-modal-key
+   "SPC" '(("s" save-buffer)
+           ("g" magit-status)
+           ("b" ibuffer-list-buffers)))
+
+  (ryo-modal-keys
+   ("v"
+    (("w" er/mark-word :name "Mark word")
+     ("d" er/mark-defun :name "Mark defun")
+     ("s" er/mark-sentence :name "Mark sentence")))
+   ("k"
+    (("w" er/mark-word :name "Kill word")
+     ("d" er/mark-defun :name "Kill defun")
+     ("s" er/mark-sentence :name "Kill sentence"))
+    :then '(kill-region))
+   ("c"
+    (("w" er/mark-word :name "Change word")
+     ("d" er/mark-defun :name "Change defun")
+     ("s" er/mark-sentence :name "Change sentence"))
+    :then '(kill-region) :exit t))
+</code></pre>
+</div>
+
+<p>
+Notice that the target should <i>not be quoted</i> if using <code>ryo-modal-keys</code>, but it should if using <code>ryo-modal-key</code>.
+</p>
+
+<p>
+As can be seen above, prefix keys could be used in a similar way as <i>verbs</i> and <i>text objects</i> in Vim. An easy way of doing this is to let the <i>text objects</i> be commands which marks a region, and then the <i>verbs</i> kan be simulated by <code>:then</code>, operating upon the selected region. In order to not repeat yourself (specifying the <i>text objects</i> over and over again, as the example above), you could do something like the following:
+</p>
+
+<div class="org-src-container">
+<pre><code class="language-lisp match-braces rainbow-braces">  (let ((text-objects
+         '(("w" er/mark-word :name "Word")
+           ("d" er/mark-defun :name "Defun")
+           ("s" er/mark-sentence :name "Sentence"))))
+    (eval `(ryo-modal-keys
+            ("v" ,text-objects)
+            ("k" ,text-objects :then '(kill-region))
+            ("c" ,text-objects :then '(kill-region) :exit t))))
+</code></pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7ccb218" class="outline-3">
+<h3 id="org7ccb218">Creating and binding deinos to keys</h3>
+<div class="outline-text-3" id="text-org7ccb218">
+<p>
+<a href="https://github.com/abo-abo/deino">deino</a> is a package that allows creation of bindings which are <i>sort of modal</i>. <code>ryo-modal</code> does not require <code>deino</code>, but if you have it installed you can easily define and bind deinos to keys. This way you can easily create a new "modal state".
+</p>
+
+<p>
+In order to create a deino, bind it to a key using <code>ryo-modal-key</code> or <code>ryo-modal-keys</code>. The <i>target</i> of the key should be <code>:deino</code> and the third argument should be a (quoted) list; this list will be used as the arguments sent to <code>defdeino</code>. An example:
+</p>
+
+<div class="org-src-container">
+<pre><code class="language-lisp match-braces rainbow-braces">  (ryo-modal-key
+   "SPC g" :deino
+   '(deino-git ()
+               "A deino for git!"
+               ("g" magit-status "magit" :color blue)
+               ("j" git-gutter:next-hunk "next")
+               ("k" git-gutter:previous-hunk "previous")
+               ("d" git-gutter:popup-hunk "diff")
+               ("s" git-gutter:stage-hunk "stage")
+               ("r" git-gutter:revert-hunk "revert")
+               ("m" git-gutter:mark-hunk "mark")
+               ("q" nil "cancel" :color blue)))
+</code></pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgded8311" class="outline-3">
+<h3 id="orgded8311">Defining "normal mode" keys which enter <code>ryo-modal</code></h3>
+<div class="outline-text-3" id="text-orgded8311">
+<p>
+If you're not in <code>ryo-modal-mode</code> you may want a key sequence which first triggers
+a command, and then enters <code>ryo-modal-mode</code>. You can then use
+<code>ryo-modal-command-then-ryo</code>. It takes a keybinding and usually a command to bind
+it to. You may also specify a keymap in which the command is bound, but
+global-map is used by default.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbcd8d59" class="outline-3">
+<h3 id="orgbcd8d59">Use-package keyword</h3>
+<div class="outline-text-3" id="text-orgbcd8d59">
+<p>
+Ryo-modal also provides a <code>use-package</code> keyword: <code>:ryo</code>, which is similar to <code>:bind</code> in that it implies <code>:defer t</code> and create autoloads for the bound commands. The keyword is followed by one or more key-binding commands, using the same syntax as used by <code>ryo-modal-keys</code> as is illustrated by the following example:
+</p>
+
+<div class="org-src-container">
+<pre><code class="language-lisp match-braces rainbow-braces">(use-package simple
+  :ensure nil
+  :ryo
+  ("SPC" (("n" next-line :name "my next line")
+          ("p" previous-line)))
+  ;; A list of keywords will be applied to all following keybindings up to the next list of keywords.
+  (:mode 'org-mode :norepeat t)
+  ("0" "M-0")
+  ("G" end-of-buffer :name "insert at buffer end" :read t)
+
+  ;; This new list of keywords will reset the applied defaults; it applies to all keybindings following.
+  (:norepeat t)
+  ("SPC g" :deino
+   '(deino-nav ()
+                "A deino for navigation"
+                ("n" next-line "next line")
+                ("p" previous-line "previous line")
+                ("q" nil "cancel" :color blue))))
+</code></pre>
+</div>
+
+<p>
+Notice that the target should not be quoted if using <code>:ryo</code> (although the third argument when using <code>:deino</code> should be.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org80862a2" class="outline-3">
+<h3 id="org80862a2"><code>which-key</code> integration</h3>
+<div class="outline-text-3" id="text-org80862a2">
+<p>
+If you're using <a href="https://github.com/justbur/emacs-which-key">which-key</a> you might be annoyed that <code>ryo</code> prefixes some commands with <code>ryo:&lt;hash&gt;:</code>. In order to remove that from the <code>which-key</code> menus, add this to your init-file:
+</p>
+
+<div class="org-src-container">
+<pre><code class="language-lisp match-braces rainbow-braces">(push '((nil . "ryo:.*:") . (nil . "")) which-key-replacement-alist)
+</code></pre>
+</div>
+
+<p>
+If you use prefix keys you can name these, making <code>which-key</code> show something useful instead of <code>+prefix</code>. In order to do this you must set <code>which-key-enable-extended-define-key</code> to <code>t</code> before loading <code>which-key</code> (please see the <a href="https://github.com/justbur/emacs-which-key">which-key readme</a> on what this does). Then you could use the normal <code>:name</code> argument on your <code>ryo</code> prefix keys:
+</p>
+
+<div class="org-src-container">
+<pre><code class="language-lisp match-braces rainbow-braces">  (ryo-modal-keys
+   ("v"
+    (("w" er/mark-word :name "Mark word")
+     ("d" er/mark-defun :name "Mark defun")
+     ("s" er/mark-sentence :name "Mark sentence"))
+    :name "mark")
+   ("k"
+    (("w" er/mark-word :name "Kill word")
+     ("d" er/mark-defun :name "Kill defun")
+     ("s" er/mark-sentence :name "Kill sentence"))
+    :name "kill" :then '(kill-region))
+   ("c"
+    (("w" er/mark-word :name "Change word")
+     ("d" er/mark-defun :name "Change defun")
+     ("s" er/mark-sentence :name "Change sentence"))
+    :name "change" :then '(kill-region) :exit t))
+</code></pre>
+</div>
+
+<p>
+If you have an old version of <code>which-key</code> you may need to update it, since <code>which-key-replacement-alist</code> and <code>which-key-enable-extended-define-key</code> weren't there from the beginning.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org69d1a09" class="outline-2">
+<h2 id="org69d1a09">Keybindings when region is active</h2>
+<div class="outline-text-2" id="text-org69d1a09">
+<p>
+If you want (some) special keybindings when the region is active, you can use <a href="https://github.com/Kungsgeten/selected.el">selected.el</a>. In order to turn it on/off at the same time as <code>ryo-modal</code>, you could do something like this:
+</p>
+
+<div class="org-src-container">
+<pre><code class="language-lisp match-braces rainbow-braces">  (use-package ryo-modal
+    :commands ryo-modal-mode
+    :bind ("C-c SPC" . ryo-modal-mode)
+    :init
+    (add-hook 'ryo-modal-mode-hook
+              (lambda ()
+                (if ryo-modal-mode
+                    (selected-minor-mode 1)
+                  (selected-minor-mode -1))))
+    :config
+    (ryo-modal-keys
+     ("q" ryo-modal-mode)
+     ("0" "M-0")
+     ("1" "M-1")
+     ("2" "M-2")
+     ("3" "M-3")
+     ("4" "M-4")
+     ("5" "M-5")
+     ("6" "M-6")
+     ("7" "M-7")
+     ("8" "M-8")
+     ("9" "M-9")
+     ("h" backward-char)
+     ("j" next-line)
+     ("k" previous-line)
+     ("l" forward-char)))
+</code></pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc5f1384" class="outline-2">
+<h2 id="orgc5f1384">Credits</h2>
+<div class="outline-text-2" id="text-orgc5f1384">
+<p>
+A lot of inspiration and code peeking from <a href="https://github.com/mrkkrp/modalka">modalka</a>, but also from <a href="https://github.com/jwiegley/use-package">use-package/bind-key</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6e21f28" class="outline-2">
+<h2 id="org6e21f28">Changelog</h2>
+<div class="outline-text-2" id="text-org6e21f28">
+<dl class="org-dl">
+<dt>November 2020</dt><dd><code>:mc-all</code> keyword added, to be used by <code>muliple-cursors</code>.</dd>
+<dt>October 2019</dt><dd>The <code>:mode</code> keyword now works on modes which derive from the specified mode.</dd>
+<dt>March 2018</dt><dd>Support for naming prefix keys with <code>which-key</code>.</dd>
+<dt>February 2018</dt><dd><code>ryo-modal-key</code> now defines commands, in order to make it work with <code>multiple-cursors</code> and similar. Also added <code>:first</code> keyword, and <code>:then</code> (and <code>:first</code>) can have functions (taking zero arguments) instead of commands (0.4).</dd>
+<dt>January 2018</dt><dd>Added <code>use-package</code> keyword <code>:ryo</code>. Also added <code>ryo-modal-set-key</code> and <code>ryo-modal-unset-key</code> (0.3).</dd>
+<dt>February 2017</dt><dd>Added <code>ryo-modal-major-mode-keys</code>. Also possible to specify keywords on all keys with a prefix, or all keys in <code>ryo-modal-keys</code>. Added <code>ryo-modal-repeat</code> (0.2).</dd>
+<dt>October 2016</dt><dd>Initial version (0.1).</dd>
+</dl>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Jeet Ray</p>
+<p class="date">Created: 2022-11-14 Mon 10:27</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
