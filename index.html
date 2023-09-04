@@ -3,18 +3,18 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-11-14 Mon 10:27 -->
+<!-- 2023-09-04 Mon 12:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>RYO modal mode!</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="Jeet Ray" />
-<link rel="stylesheet" type="text/css" href="https://combinatronics.io/sylvorg/settings/main/src/styles/primary/syvl.css" />
-<link rel="icon" href="https://combinatronics.io/sylvorg/settings/main/src/icons/favicons/shiny-zigzagoon-galar.ico" sizes="any" />
-<link rel="icon" href="https://combinatronics.io/sylvorg/settings/main/src/icons/favicons/shiny-zigzagoon-galar.svg" />
-<link rel="manifest" href="https://combinatronics.io/sylvorg/settings/main/manifest.json" />
-<link rel="stylesheet" type="text/css" href="https://combinatronics.io/sylvorg/settings/main/src/styles/highlight/paraiso-dark.min.css" />
-<script src="https://combinatronics.io/sylvorg/settings/main/src/scripts/highlight/highlight.min.js"></script>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="https://combinatronics.io/sylvorg/bundle/main/src/styles/primary/syvl.css" />
+<link rel="icon" href="https://combinatronics.io/sylvorg/bundle/main/src/icons/favicons/shiny-zigzagoon-galar.ico" sizes="any" />
+<link rel="icon" href="https://combinatronics.io/sylvorg/bundle/main/src/icons/favicons/shiny-zigzagoon-galar.svg" />
+<link rel="manifest" href="https://combinatronics.io/sylvorg/bundle/main/manifest.json" />
+<link rel="stylesheet" type="text/css" href="https://combinatronics.io/sylvorg/bundle/main/src/styles/highlight/paraiso-dark.min.css" />
+<script src="https://combinatronics.io/sylvorg/bundle/main/src/scripts/highlight/highlight.min.js"></script>
 <script>hljs.highlightAll();</script>
 <div class="header">
 <h1>We Are Syvlorg.</h1>
@@ -24,48 +24,26 @@
 <a href="https://resume.syvl.org">Résumé</a>
 <a href="https://index.syvl.org">Index</a>
 </div>
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">RYO modal mode!</h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgcb7419d">Usage</a>
+<li><a href="#org9557b8b">Usage</a>
 <ul>
-<li><a href="#org3dba636">Prefix keys</a></li>
-<li><a href="#org7ccb218">Creating and binding deinos to keys</a></li>
-<li><a href="#orgded8311">Defining "normal mode" keys which enter <code>ryo-modal</code></a></li>
-<li><a href="#orgbcd8d59">Use-package keyword</a></li>
-<li><a href="#org80862a2"><code>which-key</code> integration</a></li>
+<li><a href="#org89f9d64">Prefix keys</a></li>
+<li><a href="#org2abda2a">Creating and binding deinos to keys</a></li>
+<li><a href="#orga20d52b">Defining "normal mode" keys which enter <code>ryo-modal</code></a></li>
+<li><a href="#org25e9e37">Use-package keyword</a></li>
+<li><a href="#org14e0bb1"><code>which-key</code> integration</a></li>
 </ul>
 </li>
-<li><a href="#org69d1a09">Keybindings when region is active</a></li>
-<li><a href="#orgc5f1384">Credits</a></li>
-<li><a href="#org6e21f28">Changelog</a></li>
+<li><a href="#orgb6b3515">Keybindings when region is active</a></li>
+<li><a href="#org1311835">Credits</a></li>
+<li><a href="#orgbd41d1c">Changelog</a></li>
 </ul>
 </div>
 </div>
@@ -77,9 +55,9 @@
 The package <a href="https://github.com/jmorag/kakoune.el">kakoune.el</a> uses <code>ryo-modal-mode</code> to implement its bindings.
 </p>
 
-<div id="outline-container-orgcb7419d" class="outline-2">
-<h2 id="orgcb7419d">Usage</h2>
-<div class="outline-text-2" id="text-orgcb7419d">
+<div id="outline-container-org9557b8b" class="outline-2">
+<h2 id="org9557b8b">Usage</h2>
+<div class="outline-text-2" id="text-org9557b8b">
 <p>
 You can use <code>M-x ryo-modal-mode</code> to activate <code>ryo-modal</code>, but without configuration nothing will happen. You need to add keybindings to it first; this can be done by <code>ryo-modal-key</code> (bind one key), <code>ryo-modal-keys</code> (bind many keys at once) or <code>ryo-modal-major-mode-keys</code> (bind several keys at once, but only if in a specific major mode, or a major mode derived from another).
 </p>
@@ -90,31 +68,31 @@ Here's a simple configuration, using <a href="https://github.com/jwiegley/use-pa
 
 <div class="org-src-container">
 <pre><code class="language-lisp match-braces rainbow-braces">  (use-package ryo-modal
-    :commands ryo-modal-mode
-    :bind ("C-c SPC" . ryo-modal-mode)
-    :config
+    <span style="font-weight: bold;">:commands</span> ryo-modal-mode
+    <span style="font-weight: bold;">:bind</span> (<span style="font-style: italic;">"C-c SPC"</span> . ryo-modal-mode)
+    <span style="font-weight: bold;">:config</span>
     (ryo-modal-keys
-     ("," ryo-modal-repeat)
-     ("q" ryo-modal-mode)
-     ("h" backward-char)
-     ("j" next-line)
-     ("k" previous-line)
-     ("l" forward-char))
+     (<span style="font-style: italic;">","</span> ryo-modal-repeat)
+     (<span style="font-style: italic;">"q"</span> ryo-modal-mode)
+     (<span style="font-style: italic;">"h"</span> backward-char)
+     (<span style="font-style: italic;">"j"</span> next-line)
+     (<span style="font-style: italic;">"k"</span> previous-line)
+     (<span style="font-style: italic;">"l"</span> forward-char))
 
     (ryo-modal-keys
-     ;; First argument to ryo-modal-keys may be a list of keywords.
-     ;; These keywords will be applied to all keybindings.
-     (:norepeat t)
-     ("0" "M-0")
-     ("1" "M-1")
-     ("2" "M-2")
-     ("3" "M-3")
-     ("4" "M-4")
-     ("5" "M-5")
-     ("6" "M-6")
-     ("7" "M-7")
-     ("8" "M-8")
-     ("9" "M-9")))
+     <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">First argument to ryo-modal-keys may be a list of keywords.</span>
+     <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">These keywords will be applied to all keybindings.</span>
+     (<span style="font-weight: bold;">:norepeat</span> t)
+     (<span style="font-style: italic;">"0"</span> <span style="font-style: italic;">"M-0"</span>)
+     (<span style="font-style: italic;">"1"</span> <span style="font-style: italic;">"M-1"</span>)
+     (<span style="font-style: italic;">"2"</span> <span style="font-style: italic;">"M-2"</span>)
+     (<span style="font-style: italic;">"3"</span> <span style="font-style: italic;">"M-3"</span>)
+     (<span style="font-style: italic;">"4"</span> <span style="font-style: italic;">"M-4"</span>)
+     (<span style="font-style: italic;">"5"</span> <span style="font-style: italic;">"M-5"</span>)
+     (<span style="font-style: italic;">"6"</span> <span style="font-style: italic;">"M-6"</span>)
+     (<span style="font-style: italic;">"7"</span> <span style="font-style: italic;">"M-7"</span>)
+     (<span style="font-style: italic;">"8"</span> <span style="font-style: italic;">"M-8"</span>)
+     (<span style="font-style: italic;">"9"</span> <span style="font-style: italic;">"M-9"</span>)))
 </code></pre>
 </div>
 
@@ -142,14 +120,14 @@ Here's an example using the keyword arguments (can be used in <code>ryo-modal-ke
 </p>
 
 <div class="org-src-container">
-<pre><code class="language-lisp match-braces rainbow-braces">  (ryo-modal-key "SPC k" 'org-previous-visible-heading :then '(forward-to-word
+<pre><code class="language-lisp match-braces rainbow-braces">  (ryo-modal-key <span style="font-style: italic;">"SPC k"</span> 'org-previous-visible-heading <span style="font-weight: bold;">:then</span> '(forward-to-word
                                                                org-kill-line)
-                 :mode 'org-mode :name "org-replace-previous-heading" :read t)
+                 <span style="font-weight: bold;">:mode</span> 'org-mode <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"org-replace-previous-heading"</span> <span style="font-weight: bold;">:read</span> t)
 
   (ryo-modal-major-mode-keys
    'python-mode
-   ("J" python-nav-forward-defun)
-   ("K" python-nav-backward-defun))
+   (<span style="font-style: italic;">"J"</span> python-nav-forward-defun)
+   (<span style="font-style: italic;">"K"</span> python-nav-backward-defun))
 </code></pre>
 </div>
 
@@ -162,34 +140,34 @@ In order to get an overview of all the bindings you've defined, use <code>M-x ry
 </p>
 </div>
 
-<div id="outline-container-org3dba636" class="outline-3">
-<h3 id="org3dba636">Prefix keys</h3>
-<div class="outline-text-3" id="text-org3dba636">
+<div id="outline-container-org89f9d64" class="outline-3">
+<h3 id="org89f9d64">Prefix keys</h3>
+<div class="outline-text-3" id="text-org89f9d64">
 <p>
 Sometimes you want many keys bound under the same prefix key. A convenient way of doing this is to let the <i>target</i> be a list of the keys in the prefix map. Each element of the list will be sent to <code>ryo-modal-key</code>, using the key as a prefix. If the key has any arguments, these will be sent too. Prefix examples:
 </p>
 
 <div class="org-src-container">
 <pre><code class="language-lisp match-braces rainbow-braces">  (ryo-modal-key
-   "SPC" '(("s" save-buffer)
-           ("g" magit-status)
-           ("b" ibuffer-list-buffers)))
+   <span style="font-style: italic;">"SPC"</span> '((<span style="font-style: italic;">"s"</span> save-buffer)
+           (<span style="font-style: italic;">"g"</span> magit-status)
+           (<span style="font-style: italic;">"b"</span> ibuffer-list-buffers)))
 
   (ryo-modal-keys
-   ("v"
-    (("w" er/mark-word :name "Mark word")
-     ("d" er/mark-defun :name "Mark defun")
-     ("s" er/mark-sentence :name "Mark sentence")))
-   ("k"
-    (("w" er/mark-word :name "Kill word")
-     ("d" er/mark-defun :name "Kill defun")
-     ("s" er/mark-sentence :name "Kill sentence"))
-    :then '(kill-region))
-   ("c"
-    (("w" er/mark-word :name "Change word")
-     ("d" er/mark-defun :name "Change defun")
-     ("s" er/mark-sentence :name "Change sentence"))
-    :then '(kill-region) :exit t))
+   (<span style="font-style: italic;">"v"</span>
+    ((<span style="font-style: italic;">"w"</span> er/mark-word <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Mark word"</span>)
+     (<span style="font-style: italic;">"d"</span> er/mark-defun <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Mark defun"</span>)
+     (<span style="font-style: italic;">"s"</span> er/mark-sentence <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Mark sentence"</span>)))
+   (<span style="font-style: italic;">"k"</span>
+    ((<span style="font-style: italic;">"w"</span> er/mark-word <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Kill word"</span>)
+     (<span style="font-style: italic;">"d"</span> er/mark-defun <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Kill defun"</span>)
+     (<span style="font-style: italic;">"s"</span> er/mark-sentence <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Kill sentence"</span>))
+    <span style="font-weight: bold;">:then</span> '(kill-region))
+   (<span style="font-style: italic;">"c"</span>
+    ((<span style="font-style: italic;">"w"</span> er/mark-word <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Change word"</span>)
+     (<span style="font-style: italic;">"d"</span> er/mark-defun <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Change defun"</span>)
+     (<span style="font-style: italic;">"s"</span> er/mark-sentence <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Change sentence"</span>))
+    <span style="font-weight: bold;">:then</span> '(kill-region) <span style="font-weight: bold;">:exit</span> t))
 </code></pre>
 </div>
 
@@ -202,22 +180,22 @@ As can be seen above, prefix keys could be used in a similar way as <i>verbs</i>
 </p>
 
 <div class="org-src-container">
-<pre><code class="language-lisp match-braces rainbow-braces">  (let ((text-objects
-         '(("w" er/mark-word :name "Word")
-           ("d" er/mark-defun :name "Defun")
-           ("s" er/mark-sentence :name "Sentence"))))
+<pre><code class="language-lisp match-braces rainbow-braces">  (<span style="font-weight: bold;">let</span> ((text-objects
+         '((<span style="font-style: italic;">"w"</span> er/mark-word <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Word"</span>)
+           (<span style="font-style: italic;">"d"</span> er/mark-defun <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Defun"</span>)
+           (<span style="font-style: italic;">"s"</span> er/mark-sentence <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Sentence"</span>))))
     (eval `(ryo-modal-keys
-            ("v" ,text-objects)
-            ("k" ,text-objects :then '(kill-region))
-            ("c" ,text-objects :then '(kill-region) :exit t))))
+            (<span style="font-style: italic;">"v"</span> ,text-objects)
+            (<span style="font-style: italic;">"k"</span> ,text-objects <span style="font-weight: bold;">:then</span> '(kill-region))
+            (<span style="font-style: italic;">"c"</span> ,text-objects <span style="font-weight: bold;">:then</span> '(kill-region) <span style="font-weight: bold;">:exit</span> t))))
 </code></pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org7ccb218" class="outline-3">
-<h3 id="org7ccb218">Creating and binding deinos to keys</h3>
-<div class="outline-text-3" id="text-org7ccb218">
+<div id="outline-container-org2abda2a" class="outline-3">
+<h3 id="org2abda2a">Creating and binding deinos to keys</h3>
+<div class="outline-text-3" id="text-org2abda2a">
 <p>
 <a href="https://github.com/abo-abo/deino">deino</a> is a package that allows creation of bindings which are <i>sort of modal</i>. <code>ryo-modal</code> does not require <code>deino</code>, but if you have it installed you can easily define and bind deinos to keys. This way you can easily create a new "modal state".
 </p>
@@ -228,25 +206,25 @@ In order to create a deino, bind it to a key using <code>ryo-modal-key</code> or
 
 <div class="org-src-container">
 <pre><code class="language-lisp match-braces rainbow-braces">  (ryo-modal-key
-   "SPC g" :deino
+   <span style="font-style: italic;">"SPC g"</span> <span style="font-weight: bold;">:deino</span>
    '(deino-git ()
-               "A deino for git!"
-               ("g" magit-status "magit" :color blue)
-               ("j" git-gutter:next-hunk "next")
-               ("k" git-gutter:previous-hunk "previous")
-               ("d" git-gutter:popup-hunk "diff")
-               ("s" git-gutter:stage-hunk "stage")
-               ("r" git-gutter:revert-hunk "revert")
-               ("m" git-gutter:mark-hunk "mark")
-               ("q" nil "cancel" :color blue)))
+               <span style="font-style: italic;">"A deino for git!"</span>
+               (<span style="font-style: italic;">"g"</span> magit-status <span style="font-style: italic;">"magit"</span> <span style="font-weight: bold;">:color</span> blue)
+               (<span style="font-style: italic;">"j"</span> git-gutter:next-hunk <span style="font-style: italic;">"next"</span>)
+               (<span style="font-style: italic;">"k"</span> git-gutter:previous-hunk <span style="font-style: italic;">"previous"</span>)
+               (<span style="font-style: italic;">"d"</span> git-gutter:popup-hunk <span style="font-style: italic;">"diff"</span>)
+               (<span style="font-style: italic;">"s"</span> git-gutter:stage-hunk <span style="font-style: italic;">"stage"</span>)
+               (<span style="font-style: italic;">"r"</span> git-gutter:revert-hunk <span style="font-style: italic;">"revert"</span>)
+               (<span style="font-style: italic;">"m"</span> git-gutter:mark-hunk <span style="font-style: italic;">"mark"</span>)
+               (<span style="font-style: italic;">"q"</span> nil <span style="font-style: italic;">"cancel"</span> <span style="font-weight: bold;">:color</span> blue)))
 </code></pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgded8311" class="outline-3">
-<h3 id="orgded8311">Defining "normal mode" keys which enter <code>ryo-modal</code></h3>
-<div class="outline-text-3" id="text-orgded8311">
+<div id="outline-container-orga20d52b" class="outline-3">
+<h3 id="orga20d52b">Defining "normal mode" keys which enter <code>ryo-modal</code></h3>
+<div class="outline-text-3" id="text-orga20d52b">
 <p>
 If you're not in <code>ryo-modal-mode</code> you may want a key sequence which first triggers
 a command, and then enters <code>ryo-modal-mode</code>. You can then use
@@ -257,32 +235,32 @@ global-map is used by default.
 </div>
 </div>
 
-<div id="outline-container-orgbcd8d59" class="outline-3">
-<h3 id="orgbcd8d59">Use-package keyword</h3>
-<div class="outline-text-3" id="text-orgbcd8d59">
+<div id="outline-container-org25e9e37" class="outline-3">
+<h3 id="org25e9e37">Use-package keyword</h3>
+<div class="outline-text-3" id="text-org25e9e37">
 <p>
 Ryo-modal also provides a <code>use-package</code> keyword: <code>:ryo</code>, which is similar to <code>:bind</code> in that it implies <code>:defer t</code> and create autoloads for the bound commands. The keyword is followed by one or more key-binding commands, using the same syntax as used by <code>ryo-modal-keys</code> as is illustrated by the following example:
 </p>
 
 <div class="org-src-container">
 <pre><code class="language-lisp match-braces rainbow-braces">(use-package simple
-  :ensure nil
-  :ryo
-  ("SPC" (("n" next-line :name "my next line")
-          ("p" previous-line)))
-  ;; A list of keywords will be applied to all following keybindings up to the next list of keywords.
-  (:mode 'org-mode :norepeat t)
-  ("0" "M-0")
-  ("G" end-of-buffer :name "insert at buffer end" :read t)
+  <span style="font-weight: bold;">:ensure</span> nil
+  <span style="font-weight: bold;">:ryo</span>
+  (<span style="font-style: italic;">"SPC"</span> ((<span style="font-style: italic;">"n"</span> next-line <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"my next line"</span>)
+          (<span style="font-style: italic;">"p"</span> previous-line)))
+  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">A list of keywords will be applied to all following keybindings up to the next list of keywords.</span>
+  (<span style="font-weight: bold;">:mode</span> 'org-mode <span style="font-weight: bold;">:norepeat</span> t)
+  (<span style="font-style: italic;">"0"</span> <span style="font-style: italic;">"M-0"</span>)
+  (<span style="font-style: italic;">"G"</span> end-of-buffer <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"insert at buffer end"</span> <span style="font-weight: bold;">:read</span> t)
 
-  ;; This new list of keywords will reset the applied defaults; it applies to all keybindings following.
-  (:norepeat t)
-  ("SPC g" :deino
+  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">This new list of keywords will reset the applied defaults; it applies to all keybindings following.</span>
+  (<span style="font-weight: bold;">:norepeat</span> t)
+  (<span style="font-style: italic;">"SPC g"</span> <span style="font-weight: bold;">:deino</span>
    '(deino-nav ()
-                "A deino for navigation"
-                ("n" next-line "next line")
-                ("p" previous-line "previous line")
-                ("q" nil "cancel" :color blue))))
+                <span style="font-style: italic;">"A deino for navigation"</span>
+                (<span style="font-style: italic;">"n"</span> next-line <span style="font-style: italic;">"next line"</span>)
+                (<span style="font-style: italic;">"p"</span> previous-line <span style="font-style: italic;">"previous line"</span>)
+                (<span style="font-style: italic;">"q"</span> nil <span style="font-style: italic;">"cancel"</span> <span style="font-weight: bold;">:color</span> blue))))
 </code></pre>
 </div>
 
@@ -292,15 +270,15 @@ Notice that the target should not be quoted if using <code>:ryo</code> (although
 </div>
 </div>
 
-<div id="outline-container-org80862a2" class="outline-3">
-<h3 id="org80862a2"><code>which-key</code> integration</h3>
-<div class="outline-text-3" id="text-org80862a2">
+<div id="outline-container-org14e0bb1" class="outline-3">
+<h3 id="org14e0bb1"><code>which-key</code> integration</h3>
+<div class="outline-text-3" id="text-org14e0bb1">
 <p>
 If you're using <a href="https://github.com/justbur/emacs-which-key">which-key</a> you might be annoyed that <code>ryo</code> prefixes some commands with <code>ryo:&lt;hash&gt;:</code>. In order to remove that from the <code>which-key</code> menus, add this to your init-file:
 </p>
 
 <div class="org-src-container">
-<pre><code class="language-lisp match-braces rainbow-braces">(push '((nil . "ryo:.*:") . (nil . "")) which-key-replacement-alist)
+<pre><code class="language-lisp match-braces rainbow-braces">(<span style="font-weight: bold;">push</span> '((nil . <span style="font-style: italic;">"ryo:.*:"</span>) . (nil . <span style="font-style: italic;">""</span>)) which-key-replacement-alist)
 </code></pre>
 </div>
 
@@ -310,21 +288,21 @@ If you use prefix keys you can name these, making <code>which-key</code> show so
 
 <div class="org-src-container">
 <pre><code class="language-lisp match-braces rainbow-braces">  (ryo-modal-keys
-   ("v"
-    (("w" er/mark-word :name "Mark word")
-     ("d" er/mark-defun :name "Mark defun")
-     ("s" er/mark-sentence :name "Mark sentence"))
-    :name "mark")
-   ("k"
-    (("w" er/mark-word :name "Kill word")
-     ("d" er/mark-defun :name "Kill defun")
-     ("s" er/mark-sentence :name "Kill sentence"))
-    :name "kill" :then '(kill-region))
-   ("c"
-    (("w" er/mark-word :name "Change word")
-     ("d" er/mark-defun :name "Change defun")
-     ("s" er/mark-sentence :name "Change sentence"))
-    :name "change" :then '(kill-region) :exit t))
+   (<span style="font-style: italic;">"v"</span>
+    ((<span style="font-style: italic;">"w"</span> er/mark-word <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Mark word"</span>)
+     (<span style="font-style: italic;">"d"</span> er/mark-defun <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Mark defun"</span>)
+     (<span style="font-style: italic;">"s"</span> er/mark-sentence <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Mark sentence"</span>))
+    <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"mark"</span>)
+   (<span style="font-style: italic;">"k"</span>
+    ((<span style="font-style: italic;">"w"</span> er/mark-word <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Kill word"</span>)
+     (<span style="font-style: italic;">"d"</span> er/mark-defun <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Kill defun"</span>)
+     (<span style="font-style: italic;">"s"</span> er/mark-sentence <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Kill sentence"</span>))
+    <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"kill"</span> <span style="font-weight: bold;">:then</span> '(kill-region))
+   (<span style="font-style: italic;">"c"</span>
+    ((<span style="font-style: italic;">"w"</span> er/mark-word <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Change word"</span>)
+     (<span style="font-style: italic;">"d"</span> er/mark-defun <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Change defun"</span>)
+     (<span style="font-style: italic;">"s"</span> er/mark-sentence <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Change sentence"</span>))
+    <span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"change"</span> <span style="font-weight: bold;">:then</span> '(kill-region) <span style="font-weight: bold;">:exit</span> t))
 </code></pre>
 </div>
 
@@ -335,57 +313,57 @@ If you have an old version of <code>which-key</code> you may need to update it, 
 </div>
 </div>
 
-<div id="outline-container-org69d1a09" class="outline-2">
-<h2 id="org69d1a09">Keybindings when region is active</h2>
-<div class="outline-text-2" id="text-org69d1a09">
+<div id="outline-container-orgb6b3515" class="outline-2">
+<h2 id="orgb6b3515">Keybindings when region is active</h2>
+<div class="outline-text-2" id="text-orgb6b3515">
 <p>
 If you want (some) special keybindings when the region is active, you can use <a href="https://github.com/Kungsgeten/selected.el">selected.el</a>. In order to turn it on/off at the same time as <code>ryo-modal</code>, you could do something like this:
 </p>
 
 <div class="org-src-container">
 <pre><code class="language-lisp match-braces rainbow-braces">  (use-package ryo-modal
-    :commands ryo-modal-mode
-    :bind ("C-c SPC" . ryo-modal-mode)
-    :init
+    <span style="font-weight: bold;">:commands</span> ryo-modal-mode
+    <span style="font-weight: bold;">:bind</span> (<span style="font-style: italic;">"C-c SPC"</span> . ryo-modal-mode)
+    <span style="font-weight: bold;">:init</span>
     (add-hook 'ryo-modal-mode-hook
-              (lambda ()
-                (if ryo-modal-mode
+              (<span style="font-weight: bold;">lambda</span> ()
+                (<span style="font-weight: bold;">if</span> ryo-modal-mode
                     (selected-minor-mode 1)
                   (selected-minor-mode -1))))
-    :config
+    <span style="font-weight: bold;">:config</span>
     (ryo-modal-keys
-     ("q" ryo-modal-mode)
-     ("0" "M-0")
-     ("1" "M-1")
-     ("2" "M-2")
-     ("3" "M-3")
-     ("4" "M-4")
-     ("5" "M-5")
-     ("6" "M-6")
-     ("7" "M-7")
-     ("8" "M-8")
-     ("9" "M-9")
-     ("h" backward-char)
-     ("j" next-line)
-     ("k" previous-line)
-     ("l" forward-char)))
+     (<span style="font-style: italic;">"q"</span> ryo-modal-mode)
+     (<span style="font-style: italic;">"0"</span> <span style="font-style: italic;">"M-0"</span>)
+     (<span style="font-style: italic;">"1"</span> <span style="font-style: italic;">"M-1"</span>)
+     (<span style="font-style: italic;">"2"</span> <span style="font-style: italic;">"M-2"</span>)
+     (<span style="font-style: italic;">"3"</span> <span style="font-style: italic;">"M-3"</span>)
+     (<span style="font-style: italic;">"4"</span> <span style="font-style: italic;">"M-4"</span>)
+     (<span style="font-style: italic;">"5"</span> <span style="font-style: italic;">"M-5"</span>)
+     (<span style="font-style: italic;">"6"</span> <span style="font-style: italic;">"M-6"</span>)
+     (<span style="font-style: italic;">"7"</span> <span style="font-style: italic;">"M-7"</span>)
+     (<span style="font-style: italic;">"8"</span> <span style="font-style: italic;">"M-8"</span>)
+     (<span style="font-style: italic;">"9"</span> <span style="font-style: italic;">"M-9"</span>)
+     (<span style="font-style: italic;">"h"</span> backward-char)
+     (<span style="font-style: italic;">"j"</span> next-line)
+     (<span style="font-style: italic;">"k"</span> previous-line)
+     (<span style="font-style: italic;">"l"</span> forward-char)))
 </code></pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgc5f1384" class="outline-2">
-<h2 id="orgc5f1384">Credits</h2>
-<div class="outline-text-2" id="text-orgc5f1384">
+<div id="outline-container-org1311835" class="outline-2">
+<h2 id="org1311835">Credits</h2>
+<div class="outline-text-2" id="text-org1311835">
 <p>
 A lot of inspiration and code peeking from <a href="https://github.com/mrkkrp/modalka">modalka</a>, but also from <a href="https://github.com/jwiegley/use-package">use-package/bind-key</a>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org6e21f28" class="outline-2">
-<h2 id="org6e21f28">Changelog</h2>
-<div class="outline-text-2" id="text-org6e21f28">
+<div id="outline-container-orgbd41d1c" class="outline-2">
+<h2 id="orgbd41d1c">Changelog</h2>
+<div class="outline-text-2" id="text-orgbd41d1c">
 <dl class="org-dl">
 <dt>November 2020</dt><dd><code>:mc-all</code> keyword added, to be used by <code>muliple-cursors</code>.</dd>
 <dt>October 2019</dt><dd>The <code>:mode</code> keyword now works on modes which derive from the specified mode.</dd>
@@ -400,7 +378,7 @@ A lot of inspiration and code peeking from <a href="https://github.com/mrkkrp/mo
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jeet Ray</p>
-<p class="date">Created: 2022-11-14 Mon 10:27</p>
+<p class="date">Created: 2023-09-04 Mon 12:29</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
