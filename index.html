@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-09-04 Mon 12:29 -->
+<!-- 2023-09-04 Mon 14:03 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>RYO modal mode!</title>
@@ -32,18 +32,18 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9557b8b">Usage</a>
+<li><a href="#org8176c33">Usage</a>
 <ul>
-<li><a href="#org89f9d64">Prefix keys</a></li>
-<li><a href="#org2abda2a">Creating and binding deinos to keys</a></li>
-<li><a href="#orga20d52b">Defining "normal mode" keys which enter <code>ryo-modal</code></a></li>
-<li><a href="#org25e9e37">Use-package keyword</a></li>
-<li><a href="#org14e0bb1"><code>which-key</code> integration</a></li>
+<li><a href="#orgf046d26">Prefix keys</a></li>
+<li><a href="#orgae9a23f">Creating and binding deinos to keys</a></li>
+<li><a href="#org9b4cfd9">Defining "normal mode" keys which enter <code>ryo-modal</code></a></li>
+<li><a href="#org1d9cbff">Use-package keyword</a></li>
+<li><a href="#org57afd18"><code>which-key</code> integration</a></li>
 </ul>
 </li>
-<li><a href="#orgb6b3515">Keybindings when region is active</a></li>
-<li><a href="#org1311835">Credits</a></li>
-<li><a href="#orgbd41d1c">Changelog</a></li>
+<li><a href="#org41e80fd">Keybindings when region is active</a></li>
+<li><a href="#orgd6694e9">Credits</a></li>
+<li><a href="#orgee85e56">Changelog</a></li>
 </ul>
 </div>
 </div>
@@ -55,9 +55,9 @@
 The package <a href="https://github.com/jmorag/kakoune.el">kakoune.el</a> uses <code>ryo-modal-mode</code> to implement its bindings.
 </p>
 
-<div id="outline-container-org9557b8b" class="outline-2">
-<h2 id="org9557b8b">Usage</h2>
-<div class="outline-text-2" id="text-org9557b8b">
+<div id="outline-container-org8176c33" class="outline-2">
+<h2 id="org8176c33">Usage</h2>
+<div class="outline-text-2" id="text-org8176c33">
 <p>
 You can use <code>M-x ryo-modal-mode</code> to activate <code>ryo-modal</code>, but without configuration nothing will happen. You need to add keybindings to it first; this can be done by <code>ryo-modal-key</code> (bind one key), <code>ryo-modal-keys</code> (bind many keys at once) or <code>ryo-modal-major-mode-keys</code> (bind several keys at once, but only if in a specific major mode, or a major mode derived from another).
 </p>
@@ -140,9 +140,9 @@ In order to get an overview of all the bindings you've defined, use <code>M-x ry
 </p>
 </div>
 
-<div id="outline-container-org89f9d64" class="outline-3">
-<h3 id="org89f9d64">Prefix keys</h3>
-<div class="outline-text-3" id="text-org89f9d64">
+<div id="outline-container-orgf046d26" class="outline-3">
+<h3 id="orgf046d26">Prefix keys</h3>
+<div class="outline-text-3" id="text-orgf046d26">
 <p>
 Sometimes you want many keys bound under the same prefix key. A convenient way of doing this is to let the <i>target</i> be a list of the keys in the prefix map. Each element of the list will be sent to <code>ryo-modal-key</code>, using the key as a prefix. If the key has any arguments, these will be sent too. Prefix examples:
 </p>
@@ -193,9 +193,9 @@ As can be seen above, prefix keys could be used in a similar way as <i>verbs</i>
 </div>
 </div>
 
-<div id="outline-container-org2abda2a" class="outline-3">
-<h3 id="org2abda2a">Creating and binding deinos to keys</h3>
-<div class="outline-text-3" id="text-org2abda2a">
+<div id="outline-container-orgae9a23f" class="outline-3">
+<h3 id="orgae9a23f">Creating and binding deinos to keys</h3>
+<div class="outline-text-3" id="text-orgae9a23f">
 <p>
 <a href="https://github.com/abo-abo/deino">deino</a> is a package that allows creation of bindings which are <i>sort of modal</i>. <code>ryo-modal</code> does not require <code>deino</code>, but if you have it installed you can easily define and bind deinos to keys. This way you can easily create a new "modal state".
 </p>
@@ -222,9 +222,9 @@ In order to create a deino, bind it to a key using <code>ryo-modal-key</code> or
 </div>
 </div>
 
-<div id="outline-container-orga20d52b" class="outline-3">
-<h3 id="orga20d52b">Defining "normal mode" keys which enter <code>ryo-modal</code></h3>
-<div class="outline-text-3" id="text-orga20d52b">
+<div id="outline-container-org9b4cfd9" class="outline-3">
+<h3 id="org9b4cfd9">Defining "normal mode" keys which enter <code>ryo-modal</code></h3>
+<div class="outline-text-3" id="text-org9b4cfd9">
 <p>
 If you're not in <code>ryo-modal-mode</code> you may want a key sequence which first triggers
 a command, and then enters <code>ryo-modal-mode</code>. You can then use
@@ -235,9 +235,9 @@ global-map is used by default.
 </div>
 </div>
 
-<div id="outline-container-org25e9e37" class="outline-3">
-<h3 id="org25e9e37">Use-package keyword</h3>
-<div class="outline-text-3" id="text-org25e9e37">
+<div id="outline-container-org1d9cbff" class="outline-3">
+<h3 id="org1d9cbff">Use-package keyword</h3>
+<div class="outline-text-3" id="text-org1d9cbff">
 <p>
 Ryo-modal also provides a <code>use-package</code> keyword: <code>:ryo</code>, which is similar to <code>:bind</code> in that it implies <code>:defer t</code> and create autoloads for the bound commands. The keyword is followed by one or more key-binding commands, using the same syntax as used by <code>ryo-modal-keys</code> as is illustrated by the following example:
 </p>
@@ -270,9 +270,9 @@ Notice that the target should not be quoted if using <code>:ryo</code> (although
 </div>
 </div>
 
-<div id="outline-container-org14e0bb1" class="outline-3">
-<h3 id="org14e0bb1"><code>which-key</code> integration</h3>
-<div class="outline-text-3" id="text-org14e0bb1">
+<div id="outline-container-org57afd18" class="outline-3">
+<h3 id="org57afd18"><code>which-key</code> integration</h3>
+<div class="outline-text-3" id="text-org57afd18">
 <p>
 If you're using <a href="https://github.com/justbur/emacs-which-key">which-key</a> you might be annoyed that <code>ryo</code> prefixes some commands with <code>ryo:&lt;hash&gt;:</code>. In order to remove that from the <code>which-key</code> menus, add this to your init-file:
 </p>
@@ -313,9 +313,9 @@ If you have an old version of <code>which-key</code> you may need to update it, 
 </div>
 </div>
 
-<div id="outline-container-orgb6b3515" class="outline-2">
-<h2 id="orgb6b3515">Keybindings when region is active</h2>
-<div class="outline-text-2" id="text-orgb6b3515">
+<div id="outline-container-org41e80fd" class="outline-2">
+<h2 id="org41e80fd">Keybindings when region is active</h2>
+<div class="outline-text-2" id="text-org41e80fd">
 <p>
 If you want (some) special keybindings when the region is active, you can use <a href="https://github.com/Kungsgeten/selected.el">selected.el</a>. In order to turn it on/off at the same time as <code>ryo-modal</code>, you could do something like this:
 </p>
@@ -352,18 +352,18 @@ If you want (some) special keybindings when the region is active, you can use <a
 </div>
 </div>
 
-<div id="outline-container-org1311835" class="outline-2">
-<h2 id="org1311835">Credits</h2>
-<div class="outline-text-2" id="text-org1311835">
+<div id="outline-container-orgd6694e9" class="outline-2">
+<h2 id="orgd6694e9">Credits</h2>
+<div class="outline-text-2" id="text-orgd6694e9">
 <p>
 A lot of inspiration and code peeking from <a href="https://github.com/mrkkrp/modalka">modalka</a>, but also from <a href="https://github.com/jwiegley/use-package">use-package/bind-key</a>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgbd41d1c" class="outline-2">
-<h2 id="orgbd41d1c">Changelog</h2>
-<div class="outline-text-2" id="text-orgbd41d1c">
+<div id="outline-container-orgee85e56" class="outline-2">
+<h2 id="orgee85e56">Changelog</h2>
+<div class="outline-text-2" id="text-orgee85e56">
 <dl class="org-dl">
 <dt>November 2020</dt><dd><code>:mc-all</code> keyword added, to be used by <code>muliple-cursors</code>.</dd>
 <dt>October 2019</dt><dd>The <code>:mode</code> keyword now works on modes which derive from the specified mode.</dd>
@@ -378,7 +378,7 @@ A lot of inspiration and code peeking from <a href="https://github.com/mrkkrp/mo
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jeet Ray</p>
-<p class="date">Created: 2023-09-04 Mon 12:29</p>
+<p class="date">Created: 2023-09-04 Mon 14:03</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
